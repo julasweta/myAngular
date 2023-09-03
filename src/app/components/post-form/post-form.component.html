@@ -1,0 +1,19 @@
+<div>
+  <p>post-form works!</p>
+  <input
+    type="text"
+    name="title"
+    placeholder="title"
+    [(ngModel)]="title"
+    #inputTitle
+    (input)="onTitleInput($event)"
+  />
+  <input
+    type="text"
+    name="text"
+    placeholder="text"
+    [(ngModel)]="text"
+    #inputText
+  />
+  <button (click)="onSubmit(title, text)">Add Post</button>
+</div>
