@@ -1,1 +1,19 @@
-<posts></posts>
+<h1>Angulars Pipe</h1>
+
+<p>{{ e }}</p>
+<p>{{ e | currency }}</p>
+<p>{{ e | date }}</p>
+<p>{{ title | uppercase }}</p>
+<p>{{ title | slice : 2 }}</p>
+<pre>{{ obj | json }}</pre>
+
+<h2>myCustomPipe</h2>
+<p>{{ e | myCustomPipe : 3 }}</p>
+<p>{{ e | myCustomPipe : 4 }}</p>
+<p>{{ e | myCustomPipe : 7 }}</p>
+
+<h2>Pipe Filter</h2>
+<input type="text" [(ngModel)]="search">
+<div *ngFor="let post of posts | filterPipe:search" class="card">
+  <h4>{{ post.title }}</h4>
+</div>
