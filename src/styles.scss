@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-color: red;
+color: rgb(122, 107, 107);
+}
+
+.ng-invalid input {
+  color: red;
+}
+
+.ng-valid input {
+  color: black;
+}
+
+.validate{
+  color: red;
 }

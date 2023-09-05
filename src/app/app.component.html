@@ -1,1 +1,97 @@
-<posts></posts>
+<div>
+  <h2>{{ "forms" | uppercase }}</h2>
+
+  <form class="card" [formGroup]="form" (ngSubmit)="submit($event)">
+    <h1>Angular Forms</h1>
+    <!-- -------==========EMAIL--------------- -->
+    <div class="form-control">
+      <label>Email</label>
+      <input type="text" placeholder="Email" formControlName="email" />
+      <div class="validate">
+        <div
+          *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched"
+        >
+          Поле Email empty {{ form.status }}
+        </div>
+        <div
+          *ngIf="form.get('email')?.errors?.['email'] && form.get('email')?.touched"
+        >
+          Поле Email невірне {{ form.status }}
+        </div>
+        <div
+          *ngIf="form.get('email')?.errors?.['checkEmail'] && form.get('email')?.touched"
+        >
+         Email вже такий зареєстровно або неможливий для використання
+        </div>
+        <!-- <pre>{{form.get('email')?.errors | json}}</pre> -->
+
+      </div>
+    </div>
+    <!------------------- PASSWORD ---------------->
+    <div class="form-control">
+      <label>Password</label>
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <div class="validate">
+        <div
+          *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched"
+        >
+          Поле password empty {{ form.status }}
+        </div>
+        <div *ngIf="form.get('password')?.errors?.['minlength'].requiredLength">
+          Для корректного паролю треба
+          <b
+            >{{ form.get('password')?.errors?.['minlength'].requiredLength }}</b
+          >
+          символів
+          <p>
+            Ви ввели<b
+              >{{ form.get('password')?.errors?.['minlength'].actualLength }}</b
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--=== ===============ADDRESS ===================-->
+    <div formGroupName="address">
+      <h2>Address</h2>
+
+      <div class="form-control">
+        <label>Country</label>
+        <select formControlName="country">
+          <option value="pl">Poland</option>
+          <option value="ua">Ukraine</option>
+          <option value="it">Italy</option>
+        </select>
+      </div>
+      <button class="btn" type="button" (click)="chooseCity()">
+        Choose Country
+      </button>
+      <p></p>
+      <div class="form-control">
+        <input type="text" formControlName="city" placeholder="city" />
+      </div>
+    </div>
+
+    <div formArrayName="skills">
+      <h2>Your skills</h2>
+      <ul *ngFor="let item of allSkills">
+        <li *ngIf="item !== ''">{{ item }}</li>
+      </ul>
+      <button type="button" (click)="addSkill()">Add Skill</button>
+      <div
+        class="form-control"
+        *ngFor="let control of skillsArray.controls; let i = index"
+      >
+        <label>Skill {{ i + 1 }}</label>
+        <input type="text" [formControlName]="i" />
+      </div>
+    </div>
+
+    <button type="submit">Send</button>
+  </form>
+</div>
